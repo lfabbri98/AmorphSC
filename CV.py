@@ -34,10 +34,31 @@ def calculate_capacitance(current, frequency, V_out, W, L, n_tft=500):
     return C
 
 def calculate_DOS(capacitance, oxide_capacitance, W, L, t):
+    """
+    Function that calculated density of states from capacitance data
+
+    Parameters
+    ----------
+    capacitance : float
+        Capacitance data
+    oxide_capacitance : float
+        Specific capacitance of oxide dielectric
+    W : float
+        Width of transistor channel in meters
+    L : float
+        Length of transistor channel in meteres
+    t : float
+        Thickness of dielectric
+
+    Returns
+    -------
+    float
+        Values of density of states
+
+    """
     q0 = 1.6e-19
     CD = (capacitance*oxide_capacitance) / (oxide_capacitance-capacitance)
-    g= CD /(q0*W*L*t)
-    return g
+    return (CD /(q0*W*L*t))
 
 def calculate_energy_range(capacitance, oxide_capacitance, voltage, correction=0, init = 0):
     E = cumtrapz(1-capacitance/oxide_capacitance,voltage, initial = init)+correction
@@ -49,4 +70,3 @@ def find_fit_interval(E, g, FitLeft, FitRight):
     g = g[fit_interval]
     E = E[fit_interval]
     return E, g
-
