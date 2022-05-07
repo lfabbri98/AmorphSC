@@ -25,3 +25,28 @@ def import_char(prefix_file):
         char.append(csv)
         print(j)
     return char
+
+def import_cv(prefix_file):
+        """
+        Function that imports all file in a folder with a specific prefix, recorded
+        by Zurich lockin. It also print on console the order of imported files.
+
+        Parameters
+        ----------
+        prefix_file : string
+            Prefix of files that have to be imported
+
+        Returns
+        -------
+        char : float
+            Array of imported files
+
+        """
+        
+        files_cv = glob.glob(prefix_file)
+        cv = []
+        for j in files_cv:
+            csv = pd.read_csv(j, sep=";", header=4, names=["Voff", "Amp"])
+            cv.append(csv)
+            print(j)
+        return cv
