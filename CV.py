@@ -104,10 +104,10 @@ def find_fit_interval(E, g, FitLeft, FitRight):
 
     Returns
     -------
-    E : TYPE
-        DESCRIPTION.
-    g : TYPE
-        DESCRIPTION.
+    E : float
+        Energy range between Left and Right
+    g : float
+        DOS range between Left and Right
 
     """
     fit_interval = np.where((E>=FitLeft) & (E<=FitRight))
