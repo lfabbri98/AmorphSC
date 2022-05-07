@@ -56,15 +56,60 @@ def calculate_DOS(capacitance, oxide_capacitance, W, L, t):
         Values of density of states
 
     """
-    q0 = 1.6e-19
+    q0 = 1.6e-19 #electron charge
     CD = (capacitance*oxide_capacitance) / (oxide_capacitance-capacitance)
     return (CD /(q0*W*L*t))
 
 def calculate_energy_range(capacitance, oxide_capacitance, voltage, correction=0, init = 0):
+    """
+    Function that calculates energy (or surface potential) from data
+
+    Parameters
+    ----------
+    capacitance : float
+        Values of measured capacitance
+    oxide_capacitance : float
+        Specific capacitance of oxide layer
+    voltage : float
+        Values of voltage offset used in CV measure
+    correction : float, optional
+        Optional correction to energy scale (account for flat band
+                                             voltage). The default is 0.
+    init : float, optional
+        Initial value for integration. The default is 0.
+
+    Returns
+    -------
+    E : float
+        Values of energy range.
+
+    """
     E = cumtrapz(1-capacitance/oxide_capacitance,voltage, initial = init)+correction
     return E
 
 def find_fit_interval(E, g, FitLeft, FitRight):
+    """
+    Function that finds intervals for fitting of DOS vs Energy
+
+    Parameters
+    ----------
+    E : float
+        Energy values
+    g : float
+        DOS values
+    FitLeft : float
+        Left margin to fit data
+    FitRight : float
+        DRight margin to fit data
+
+    Returns
+    -------
+    E : TYPE
+        DESCRIPTION.
+    g : TYPE
+        DESCRIPTION.
+
+    """
     fit_interval = np.where((E>=FitLeft) & (E<=FitRight))
     fit_interval = fit_interval[0]
     g = g[fit_interval]

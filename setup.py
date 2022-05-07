@@ -1,5 +1,4 @@
 import numpy
-import os
 from distutils.dir_util import copy_tree
 
 path = numpy.__path__[0]
