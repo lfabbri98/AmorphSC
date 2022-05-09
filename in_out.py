@@ -59,3 +59,22 @@ def s0(a):
 
 def s1(a):
     return '{:.1e}'.format(a)
+
+def import_PC(path):
+    """
+    Function that imports values of photocurrent from Elvis Card from UniBO
+
+    Parameters
+    ----------
+    path : string
+       Oath of file to be imported
+
+    Returns
+    -------
+    tft : dataframe
+        Dataframe with imported data
+
+    """
+    tft = pd.read_csv(path, header=13, 
+                        names=["WL", "Amp", "Ph", "f", "s", "RMS", "IPCE"], sep="\t")
+    return tft
