@@ -33,7 +33,7 @@ def calculate_PC(data, gain, change_positions):
         Amp = np.concatenate((Amp, amp))
     return Amp
 
-def lamp_spec(data):
+def lamp_spec(data, gain, change):
     """
     Function that takes into account a set of lamp data and returns the adjustment
     of the set with the sensitivity of photodiode
@@ -56,10 +56,11 @@ def lamp_spec(data):
     pdc_int = interp1d(pdc.WL, pdc.S)
     sens_new_WL = np.linspace(200,1000, 1000 )
     sens_new = pdc_int(sens_new_WL)
+    PC = calculate_PC(data, gain, change)
     for i in range(len(data.WL)):
         for j in range(len(sens_new_WL)):
             if (data.WL[i] >= sens_new_WL[j] and data.WL[i] < sens_new_WL[j+1]):
-                L1.append(data.Amp[i] /( 1e-3 * sens_new[j]))
+                L1.append(PC[i] /( 1e-3 * sens_new[j]))
                 break
             else: continue
     L1 = np.asarray(L1)
