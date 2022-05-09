@@ -2,6 +2,7 @@ import pandas as pd
 from scipy.integrate import cumtrapz
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
 
 def calculate_capacitance(current, frequency, V_out, W, L, n_tft=500):
     """
@@ -115,3 +116,18 @@ def find_fit_interval(E, g, FitLeft, FitRight):
     g = g[fit_interval]
     E = E[fit_interval]
     return E, g
+
+def c_thick_func(phi, k, omega, delta):
+    epsilon_0 = 8.85e-12
+    epsilon=10
+    output = []
+    for x in range(len(phi)):
+        num = np.exp(omega*(phi[x]-delta)) -1
+        den = np.sqrt(2*(np.exp(omega*(phi[x]-delta))-omega*(phi[x]-delta)-1))
+        if phi[x]-delta >=  0:
+            p1 = epsilon*epsilon_0 * np.sqrt(k/omega)
+        elif phi[x]-delta < 0 :
+            p1 = -epsilon*epsilon_0 * np.sqrt(k/omega)
+        output.append(p1*num/den)   
+
+    return output

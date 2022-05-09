@@ -50,3 +50,12 @@ def import_cv(prefix_file):
             cv.append(csv)
             print(j)
         return cv
+
+def s4(a):
+    return '{:.4e}'.format(a)
+
+def s0(a):
+    return '{:.0e}'.format(a)
+
+def s1(a):
+    return '{:.1e}'.format(a)
