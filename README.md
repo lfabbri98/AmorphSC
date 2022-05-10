@@ -5,9 +5,9 @@ This is a Python library created for my master thesis on amorphous semiconductor
 ## Installation
 
 To install simply write
-'''
-pip install AmorphSC
-'''
+
+	pip install AmorphSC
+
 
 ## in_out.py
 
