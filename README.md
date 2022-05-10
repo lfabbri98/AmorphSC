@@ -12,6 +12,10 @@ To install simply write
 	
 All dependecies should be automatically installed, but if something goes wrong it is possible to find the list in *AmorphSC.egg-info -> requires.txt*
 
+If you want to update the installed package at the latest version use
+
+	pip install --upgrade AmorphSC
+
 ## Structure
 
 The package is divided into different files that can be used for both analysis and input/output. A detailed description of every function is present in the wiki.
