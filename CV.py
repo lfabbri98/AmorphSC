@@ -118,6 +118,10 @@ def find_fit_interval(E, g, FitLeft, FitRight):
     return E, g
 
 def c_thick_func(phi, k, omega, delta):
+    """
+    Analytical function used to fit CV data in function of surface potential.
+    Paramters are k, omega and delta while phi is the variable.
+    """
     epsilon_0 = 8.85e-12
     epsilon=10
     output = []
