@@ -2,7 +2,8 @@
 
 This is a Python library created for my master thesis on amorphous semiconductors. It is composed by many files, each one to perform a different kind of analysis.
 
-##Installation
+## Installation
+
 To install simply write
 '''
 pip install AmorphSC
