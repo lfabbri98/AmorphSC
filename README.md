@@ -20,8 +20,7 @@ Now a general description of every file will be given.
 
 ### in_out.py
 
-This is a file that contains functions dedicated to input and output. They are built on instruments I used in lab. However, it is very simple if ones would like to use different instruments. It's enough to modify the part in which column names are given since output files from different intruments will be different. Anyway, using input functions written by me is not mandatory! 
-
+This is a file that contains functions dedicated to input and output. For example with **import_file** it is possible to import more than one file per time with the same prefix and path. 
 Here you can also find functions called **s** that can print any number in scientific notation.
 
 ### CV.py
