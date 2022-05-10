@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
   name = 'AmorphSC',         # How you named your package folder (MyLib)
   packages = ['AmorphSC'],   # Chose the same as "name"
-  version = '0.1.4',      # Start with a small number and increase it with every change you make
+  version = '0.1.5',      # Start with a small number and increase it with every change you make
   license='GNU',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'Package to permorm data analysis on amorphous semiconductors',   # Give a short description about your library
   author = 'YLuca Fabbri',                   # Type in your name
