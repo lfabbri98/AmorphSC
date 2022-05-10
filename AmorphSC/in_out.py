@@ -1,55 +1,38 @@
 import glob
 import pandas as pd
 
-def import_char(prefix_file):
+def import_file(prefix_file, names, sep="\t", header=0):
     """
-    Function that imports all file in a folder with a specific prefix, recorded
-    by Keysight SMU. It also print on console the order of imported files.
+    Function that given a prefix file composed by path and prexif can import
+    all files with that prefix in the given folder.
+    
 
     Parameters
     ----------
     prefix_file : string
-        Prefix of files that have to be imported
+        common prexif of files that have to be imported
+    names : string
+        vector of names of file columns
+    sep : string, optional
+        DSeparator of each column. The default is "\t".
+    header : int, optional
+        Number of line of the header. The default is 0.
 
     Returns
     -------
-    char : float
-        Array of imported files
+    char : 
+        List with imported files.
 
     """
     
     files_char = glob.glob(prefix_file)
     char = []
     for j in files_char:
-        csv = pd.read_csv(j, sep="\t", header=1, names=["VG", "IG", "tG", "VD", "ID", "tD"])
+        csv = pd.read_csv(j, sep, header, names)
         char.append(csv)
         print(j)
     return char
 
-def import_cv(prefix_file):
-        """
-        Function that imports all file in a folder with a specific prefix, recorded
-        by Zurich lockin. It also print on console the order of imported files.
-
-        Parameters
-        ----------
-        prefix_file : string
-            Prefix of files that have to be imported
-
-        Returns
-        -------
-        char : float
-            Array of imported files
-
-        """
-        
-        files_cv = glob.glob(prefix_file)
-        cv = []
-        for j in files_cv:
-            csv = pd.read_csv(j, sep=";", header=4, names=["Voff", "Amp"])
-            cv.append(csv)
-            print(j)
-        return cv
 
 def s4(a):
     return '{:.4e}'.format(a)
@@ -59,22 +42,3 @@ def s0(a):
 
 def s1(a):
     return '{:.1e}'.format(a)
-
-def import_PC(path):
-    """
-    Function that imports values of photocurrent from Elvis Card from UniBO
-
-    Parameters
-    ----------
-    path : string
-       Oath of file to be imported
-
-    Returns
-    -------
-    tft : dataframe
-        Dataframe with imported data
-
-    """
-    tft = pd.read_csv(path, header=13, 
-                        names=["WL", "Amp", "Ph", "f", "s", "RMS", "IPCE"], sep="\t")
-    return tft
