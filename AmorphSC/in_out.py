@@ -1,7 +1,7 @@
 import glob
 import pandas as pd
 
-def import_file(prefix_file, names, sep="\t", header=0):
+def import_file(prefix_file, names, separator="\t", header=0):
     """
     Function that given a prefix file composed by path and prexif can import
     all files with that prefix in the given folder.
@@ -28,7 +28,7 @@ def import_file(prefix_file, names, sep="\t", header=0):
     files_char = glob.glob(prefix_file)
     char = []
     for j in files_char:
-        csv = pd.read_csv(j, sep, header, names)
+        csv = pd.read_csv(j, sep = separator, header = header, names=names)
         char.append(csv)
         print(j)
     return char
