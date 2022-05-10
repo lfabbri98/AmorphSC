@@ -33,7 +33,7 @@ def calculate_PC(data, gain, change_positions):
         Amp = np.concatenate((Amp, amp))
     return Amp
 
-def lamp_spec(data, gain, change):
+def lamp_spec(data, gain, change, diode_area):
     """
     Function that takes into account a set of lamp data and returns the adjustment
     of the set with the sensitivity of photodiode
@@ -49,14 +49,18 @@ def lamp_spec(data, gain, change):
         vector with data adjusted with sensitivity
 
     """
-    r = 0.63 #cm
-    A = 3.1415 * r * r
+    A = diode_area
     L1=[]
+    
+    #import photodiode sensitivities
     pdc = pd.read_csv("SensitivityPhotodiode.dat", sep="\t", names=["WL", "S"])
+    #perform and interpolation to smooth conversion
     pdc_int = interp1d(pdc.WL, pdc.S)
     sens_new_WL = np.linspace(200,1000, 1000 )
     sens_new = pdc_int(sens_new_WL)
+    #calculate spectrum of lamp
     PC = calculate_PC(data, gain, change)
+    #now multiply sensitivity
     for i in range(len(data.WL)):
         for j in range(len(sens_new_WL)):
             if (data.WL[i] >= sens_new_WL[j] and data.WL[i] < sens_new_WL[j+1]):
@@ -64,4 +68,5 @@ def lamp_spec(data, gain, change):
                 break
             else: continue
     L1 = np.asarray(L1)
+    #return adjusted values in W/cm^2
     return L1/A
