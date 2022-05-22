@@ -20,7 +20,7 @@ def calculate_PC(amplitude: list, sensitivity: float, gain: list, change_positio
 
     Returns
     -------
-    Amp: float
+    Amp: list of float
         calculated amplitude photocurrent
 
     """
@@ -54,11 +54,9 @@ def lamp_spec(amplitude: list, wavelength: list, sensitivity: float, gain: list,
     change : list of float
         vector with positions at which the gain has been changed
     
-    
-    
     Returns
     -------
-    floar
+    L1/A : list of float
         vector with data adjusted with sensitivity
 
     """
