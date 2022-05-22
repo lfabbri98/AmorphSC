@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from scipy.interpolate import interp1d
 
-def calculate_PC(amplitude: list, sensitivity: float, gain: list, change_positions: list) -> list:
+def calculate_PC(amplitude: list, sensitivity: float, gain: list, change_positions: list) -> np.ndarray:
     """
     Function that given input data returns the photocurrent spectra calculated
     with each 
@@ -20,7 +20,7 @@ def calculate_PC(amplitude: list, sensitivity: float, gain: list, change_positio
 
     Returns
     -------
-    Amp: list of float
+    Amp: numpy array
         calculated amplitude photocurrent
 
     """
@@ -35,7 +35,7 @@ def calculate_PC(amplitude: list, sensitivity: float, gain: list, change_positio
         Amp = np.concatenate((Amp, amp))
     return Amp
 
-def lamp_spec(amplitude: list, wavelength: list, sensitivity: float, gain: list, change:list , diode_area: float) -> list:
+def lamp_spec(amplitude: list, wavelength: list, sensitivity: float, gain: list, change:list , diode_area: float) -> np.ndarray:
     """
     Function that takes into account a set of lamp data and returns the adjustment
     of the set with the sensitivity of photodiode
@@ -56,7 +56,7 @@ def lamp_spec(amplitude: list, wavelength: list, sensitivity: float, gain: list,
     
     Returns
     -------
-    L1/A : list of float
+    L1/A : numpy array
         vector with data adjusted with sensitivity
 
     """
