@@ -1,7 +1,7 @@
 import glob
 import pandas as pd
 
-def import_file(prefix_file, names, separator="\t", header=0):
+def import_file(prefix_file: str, names: list, separator="\t", header=0) -> list:
     """
     Function that given a prefix file composed by path and prexif can import
     all files with that prefix in the given folder.
@@ -11,10 +11,10 @@ def import_file(prefix_file, names, separator="\t", header=0):
     ----------
     prefix_file : string
         common prexif of files that have to be imported
-    names : string
+    names : list of string
         vector of names of file columns
     sep : string, optional
-        DSeparator of each column. The default is "\t".
+        Separator of each column. The default is "\t".
     header : int, optional
         Number of line of the header. The default is 0.
 
