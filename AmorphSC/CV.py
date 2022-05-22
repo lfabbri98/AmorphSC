@@ -4,14 +4,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
-def calculate_capacitance(current, frequency, V_out, W, L, n_tft=500):
+def calculate_capacitance(current: list, frequency: float, V_out: float, W: float, L: float, n_tft=500) -> list:
     """
     Function that calculates capacitance from I-V data recorded. Since data are
     acquired as AC signal then C = I/(2*pi*f*V_out)
 
     Parameters
     ----------
-    current : float
+    current : list of float
         Current value registered from lock-in amplifier
     frequency : float
         DFrequency of acquisition
@@ -34,13 +34,13 @@ def calculate_capacitance(current, frequency, V_out, W, L, n_tft=500):
     C = C-min(C) #remove parasite capacitance
     return C
 
-def calculate_DOS(capacitance, oxide_capacitance, W, L, t):
+def calculate_DOS(capacitance: list, oxide_capacitance: float, W: float, L: float, t: float) -> list:
     """
     Function that calculated density of states from capacitance data
 
     Parameters
     ----------
-    capacitance : float
+    capacitance : list of float
         Capacitance data
     oxide_capacitance : float
         Specific capacitance of oxide dielectric
@@ -53,7 +53,7 @@ def calculate_DOS(capacitance, oxide_capacitance, W, L, t):
 
     Returns
     -------
-    float
+    list of float
         Values of density of states
 
     """
@@ -61,17 +61,17 @@ def calculate_DOS(capacitance, oxide_capacitance, W, L, t):
     CD = (capacitance*oxide_capacitance) / (oxide_capacitance-capacitance)
     return (CD /(q0*W*L*t))
 
-def calculate_energy_range(capacitance, oxide_capacitance, voltage, correction=0, init = 0):
+def calculate_energy_range(capacitance: list, oxide_capacitance: float, voltage: list, correction=0, init = 0) -> list:
     """
     Function that calculates energy (or surface potential) from data
 
     Parameters
     ----------
-    capacitance : float
+    capacitance : list of float
         Values of measured capacitance
     oxide_capacitance : float
         Specific capacitance of oxide layer
-    voltage : float
+    voltage : list of float
         Values of voltage offset used in CV measure
     correction : float, optional
         Optional correction to energy scale (account for flat band
@@ -81,22 +81,22 @@ def calculate_energy_range(capacitance, oxide_capacitance, voltage, correction=0
 
     Returns
     -------
-    E : float
+    E : list of float
         Values of energy range.
 
     """
     E = cumtrapz(1-capacitance/oxide_capacitance,voltage, initial = init)+correction
     return E
 
-def find_fit_interval(E, g, FitLeft, FitRight):
+def find_fit_interval(E: list, g: list , FitLeft: float, FitRight: float ):
     """
     Function that finds intervals for fitting of DOS vs Energy
 
     Parameters
     ----------
-    E : float
+    E : list of float
         Energy values
-    g : float
+    g : list of float
         DOS values
     FitLeft : float
         Left margin to fit data
@@ -105,9 +105,9 @@ def find_fit_interval(E, g, FitLeft, FitRight):
 
     Returns
     -------
-    E : float
+    E : list of float
         Energy range between Left and Right
-    g : float
+    g : list of float
         DOS range between Left and Right
 
     """
