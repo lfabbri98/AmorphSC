@@ -34,4 +34,8 @@ This file contains all the functions to analyze CV data. It is possible to plot 
 ### photocurrent.py
 
 This module contains functions to permorm analysis on photocurrent data. More in detail, it is possible to calculate photocurrent spectra, lamp spectra, tauc plots,...
+
+### KPFM.py
+
+This module contains four functions that are needed to numerically solve Poisson equation starting from KPFM data. Moreover you can directly fit data and obtain DOS parameters.
  
