@@ -239,15 +239,16 @@ def fit_KPFM_curve(VG: list, phit: list, t: float, Cox: float, p0=[1,1,1]) -> np
     
     start_time = time.time() #start time counting
     
+    t_set = t
+    Cox_set = Cox
+    
+    reduced_f = lambda phit, ND, Et, VFB: fit_Poisson_Tip(phit, ND, Et, VFB, t_set, Cox_set)
+    
     #Fit data setting to completely bounded parameters t and Cox since they
     #are provided from the user
-    popt, pcov = curve_fit(fit_Poisson_Tip, xdata = phit, ydata = VG,
-                           p0 = p0, bounds=((-np.inf, np.inf),
-                                            (-np.inf, np.inf),
-                                            (-np.inf, np.inf),
-                                            (t,t),
-                                            (Cox, Cox))
-                           )
+    popt, pcov = curve_fit(reduced_f, xdata = phit, ydata = VG,
+                           p0 = p0)
+                           
     
     err = np.sqrt(np.diag(pcov)) #calculate errors on parameters
 
@@ -267,6 +268,7 @@ def fit_KPFM_curve(VG: list, phit: list, t: float, Cox: float, p0=[1,1,1]) -> np
     print("VFB = ", io.s4(VFB), " +- ", io.s4(err[2]))
     print("Time used (mins): ", total)
     
+    
     #Output File
     names = ["ND", "Et", "VFB", "Time"]
     values = [io.s4(ND), io.s4(Et), io.s4(VFB), total ]
@@ -276,5 +278,5 @@ def fit_KPFM_curve(VG: list, phit: list, t: float, Cox: float, p0=[1,1,1]) -> np
     data_out = pd.DataFrame(lib_out)
     data_out.to_csv("Data_Out_Fit.txt", sep="\t")
 
-    
+    return ND, Et, VFB
     
